@@ -1,0 +1,30 @@
+# V build artifacts
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+a.out
+
+# V compiled binaries
+vrisk
+main
+
+# V cache
+.vmodules/
+v.mod.sum
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test coverage
+*.lcov
