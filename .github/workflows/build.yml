@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  V_SCRIPT: 'src/main.v'
+  V_SCRIPT: 'main.v'
   OUTPUT_NAME: 'risksaufquenv.exe'
 
 jobs:
