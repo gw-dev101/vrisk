@@ -1,0 +1,40 @@
+name: Build V Executable (Windows)
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  V_SCRIPT: 'src/main.v'
+  OUTPUT_NAME: 'risksaufquenv.exe'
+
+jobs:
+  build-v-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install V compiler
+        run: |
+          git clone https://github.com/vlang/v
+          cd v
+          .\make.bat
+        shell: pwsh
+
+      - name: Add V to PATH
+        run: echo "$PWD\\v" | Out-File -Append -FilePath $env:GITHUB_PATH
+        shell: pwsh
+
+      - name: Build V executable
+        run: |
+          v -prod -o "$env:OUTPUT_NAME" "$env:V_SCRIPT"
+        shell: pwsh
+
+      - name: Upload built executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-executable
+          path: ${{ env.OUTPUT_NAME }}
